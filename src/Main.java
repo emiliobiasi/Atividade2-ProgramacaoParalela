@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
         try
         {
-            int tamVetor = Menu.mainMenu();
-            //int tamVetor = 20;
+            //int tamVetor = Menu.mainMenu();
+            int tamVetor = 100;
             System.out.println("Tamanho do Vetor: " + tamVetor);
 
             // populando
@@ -22,37 +22,17 @@ public class Main {
 
             System.out.println("Vetor desordenado: " + vetorGigante);
 
+
             int numProcessadores = Programa.numProcessadores();
             AtomicInteger processadores = new AtomicInteger(numProcessadores);
+            System.out.println("Numero total de processadores deste computador: " + numProcessadores);
 
+            System.out.println("Chamando método merge sort: ");
 
             MyMergeSortClass.myMergeSort(vetorGigante, processadores);
 
             System.out.println("Vetor ordenado: " + vetorGigante);
 
-//            ThreadDeOrdenacao[] threads = new ThreadDeOrdenacao[numeroDeProcessadores.getNumeroDeProcessadores()];
-//            numeroDeProcessadores.diminuiProcessador();
-//            MergeSortThread thread = new MergeSortThread(vetorGigante);
-//            thread.start();
-
-//            for (ThreadDeOrdenacao thread : threads) {
-//                try {
-//                    thread.join();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            for (ThreadDeOrdenacao threadDeBusca : threads) {
-//                Integer posicaoEncontrada = threadDeBusca.getPosicaoEncontrada();
-//                Integer threadQueEncontrou = threadDeBusca.getThreadId();
-//                if (posicaoEncontrada == null) {
-//                    System.out.println("valor NÃO ENCONTRADO pela thread: " + threadQueEncontrou);
-//
-//                } else {
-//                    System.out.println("Valor ENCONTRADO na posição " + posicaoEncontrada + " pela thread: " + threadQueEncontrou);
-//                }
-//            }
         }
         catch (Exception erro)
         {}

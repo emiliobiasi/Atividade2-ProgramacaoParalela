@@ -8,56 +8,56 @@ public class MyMergeSortClass {
         if (vector.size() > 1) {
             if (processadores.getAndDecrement() > 0) {
                 int mid = vector.size() / 2;
-                Vector<Integer> left = new Vector<>(vector.subList(0, mid));
-                Vector<Integer> right = new Vector<>(vector.subList(mid, vector.size()));
+                Vector<Integer> esquerda = new Vector<>(vector.subList(0, mid));
+                Vector<Integer> direita = new Vector<>(vector.subList(mid, vector.size()));
 
-                System.out.println(processadores.get());
-                Thread leftThread = new MergeSortThread(left, processadores);
-                Thread rightThread = new MergeSortThread(right, processadores);
+                System.out.println("Processadores disponíveis: " + processadores.get());
+                Thread threadEsquerda = new MergeSortThread(esquerda, processadores);
+                Thread threadDireita = new MergeSortThread(direita, processadores);
 
-                leftThread.start();
-                rightThread.start();
+                threadEsquerda.start();
+                threadDireita.start();
 
                 try {
-                    leftThread.join();
-                    rightThread.join();
+                    threadEsquerda.join();
+                    threadDireita.join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                merge(vector, left, right);
-                processadores.incrementAndGet(); // Libera um processador
+                merge(vector, esquerda, direita);
+                processadores.incrementAndGet();
             } else {
-                List<Integer> leftSublist = vector.subList(0, vector.size() / 2);
-                List<Integer> rightSublist = vector.subList(vector.size() / 2, vector.size());
+                List<Integer> sublistEsquerda = vector.subList(0, vector.size() / 2);
+                List<Integer> sublistDireita = vector.subList(vector.size() / 2, vector.size());
 
-                Vector<Integer> left = new Vector<>(leftSublist);
-                Vector<Integer> right = new Vector<>(rightSublist);
+                Vector<Integer> esquerda = new Vector<>(sublistEsquerda);
+                Vector<Integer> direita = new Vector<>(sublistDireita);
 
-                myMergeSort(left, processadores);
-                myMergeSort(right, processadores);
+                myMergeSort(esquerda, processadores);
+                myMergeSort(direita, processadores);
 
-                merge(vector, left, right);
+                merge(vector, esquerda, direita);
             }
         }
     }
 
-    public static void merge(Vector<Integer> vector, Vector<Integer> left, Vector<Integer> right) {
+    public static void merge(Vector<Integer> vector, Vector<Integer> esquerda, Vector<Integer> direita) {
         int i = 0, j = 0, k = 0;
-        while (i < left.size() && j < right.size()) {
-            if (left.get(i) < right.get(j)) {
-                vector.set(k++, left.get(i++));
+        while (i < esquerda.size() && j < direita.size()) {
+            if (esquerda.get(i) < direita.get(j)) {
+                vector.set(k++, esquerda.get(i++));
             } else {
-                vector.set(k++, right.get(j++));
+                vector.set(k++, direita.get(j++));
             }
         }
 
-        while (i < left.size()) {
-            vector.set(k++, left.get(i++));
+        while (i < esquerda.size()) {
+            vector.set(k++, esquerda.get(i++));
         }
 
-        while (j < right.size()) {
-            vector.set(k++, right.get(j++));
+        while (j < direita.size()) {
+            vector.set(k++, direita.get(j++));
         }
     }
 
