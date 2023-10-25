@@ -2,43 +2,38 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
         try
         {
-            //int tamVetor = Menu.mainMenu();
-            int tamVetor = 20;
+            int tamVetor = Menu.mainMenu();
+            //int tamVetor = 20;
             System.out.println("Tamanho do Vetor: " + tamVetor);
 
-            Integer[] vetorGigante = new Integer[tamVetor];
+            // populando
+            Vector<Integer> vetorGigante = new Vector<>(tamVetor);
             for (int i = 0; i < tamVetor; i++) {
-                vetorGigante[i] = i;
+                vetorGigante.add(i);
             }
-            List<Integer> lista = new ArrayList<>();
-            Collections.addAll(lista, vetorGigante);
+            // embaralhando
+            Collections.shuffle(vetorGigante);
 
-            // Embaralhe a lista
-            Collections.shuffle(lista);
+            System.out.println("Vetor desordenado: " + vetorGigante);
 
-            // Converta a lista embaralhada de volta para um array
-            lista.toArray(vetorGigante);
-
-            System.out.println(vetorGigante);
+            int numProcessadores = Programa.numProcessadores();
+            AtomicInteger processadores = new AtomicInteger(numProcessadores);
 
 
-            Processadores numeroDeProcessadores = new Processadores( Programa.numProcessadores());
-            int numeroDeThreads = 0;
+            MyMergeSortClass.myMergeSort(vetorGigante, processadores);
 
-            //ThreadDeOrdenacao[] threads = new ThreadDeOrdenacao[numeroDeProcessadores.getNumeroDeProcessadores()];
-            numeroDeProcessadores.diminuiProcessador();
-            ThreadDeOrdenacao thread = new ThreadDeOrdenacao(vetorGigante, numeroDeProcessadores);
+            System.out.println("Vetor ordenado: " + vetorGigante);
 
-
-
-            thread.start();
-
-
+//            ThreadDeOrdenacao[] threads = new ThreadDeOrdenacao[numeroDeProcessadores.getNumeroDeProcessadores()];
+//            numeroDeProcessadores.diminuiProcessador();
+//            MergeSortThread thread = new MergeSortThread(vetorGigante);
+//            thread.start();
 
 //            for (ThreadDeOrdenacao thread : threads) {
 //                try {

@@ -1,19 +1,23 @@
 public class Processadores {
-    private Integer numeroDeProcessadores;
+    private int value;
 
-    public Processadores(Integer numeroDeProcessadores) {
-        this.numeroDeProcessadores = numeroDeProcessadores;
+    public Processadores(int initialValue) {
+        this.value = initialValue;
     }
 
-    public Integer getNumeroDeProcessadores() {
-        return numeroDeProcessadores;
+    public synchronized int get() {
+        return value;
     }
 
-    public boolean isDisponivel() {
-        return this.numeroDeProcessadores >= 1;
+    public synchronized int getAndDecrement() {
+        int oldValue = value;
+        value--;
+        return oldValue;
     }
 
-    public void diminuiProcessador() {
-        this.numeroDeProcessadores = this.numeroDeProcessadores - 1;
+    public synchronized int getAndIncrement() {
+        int oldValue = value;
+        value++;
+        return oldValue;
     }
 }
