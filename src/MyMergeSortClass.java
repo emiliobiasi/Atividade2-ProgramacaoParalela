@@ -13,6 +13,7 @@ public class MyMergeSortClass {
 
                 Thread threadEsquerda = new MergeSortThread(esquerda, processadores);
                 Thread threadDireita = new MergeSortThread(direita, processadores);
+                System.out.println("Iniciando threads para esquerda e direita.");
 
                 threadEsquerda.start();
                 threadDireita.start();
@@ -20,6 +21,7 @@ public class MyMergeSortClass {
                 try {
                     threadEsquerda.join();
                     threadDireita.join();
+                    System.out.println("Threads para esquerda e direita finalizadas.");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

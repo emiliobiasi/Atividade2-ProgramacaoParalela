@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
+// Gian Vitor Dutra   21001048
+// Emílio José Biasi   21006674
 public class Main {
     public static void main(String[] args) {
         try
@@ -12,12 +14,11 @@ public class Main {
             int tamVetor = 100;
             System.out.println("Tamanho do Vetor: " + tamVetor);
 
-            // populando
             Vector<Integer> vetorGigante = new Vector<>(tamVetor);
             for (int i = 0; i < tamVetor; i++) {
                 vetorGigante.add(i);
             }
-            // embaralhando
+
             Collections.shuffle(vetorGigante);
 
             System.out.println("Vetor desordenado: " + vetorGigante);
