@@ -11,7 +11,6 @@ public class MyMergeSortClass {
                 Vector<Integer> esquerda = new Vector<>(vector.subList(0, mid));
                 Vector<Integer> direita = new Vector<>(vector.subList(mid, vector.size()));
 
-                System.out.println("Processadores disponíveis: " + processadores.get());
                 Thread threadEsquerda = new MergeSortThread(esquerda, processadores);
                 Thread threadDireita = new MergeSortThread(direita, processadores);
 
